@@ -14,7 +14,10 @@ class Sender():
 
     def collect(self):
         with open(self.logfile, 'rb') as f:
-            resp = r.post(self.remote, files={'logfile.txt': f})
+            try:
+                resp = r.post(self.remote, files={'logfile.txt': f})
+            except:
+                pass
                 
     def clear_logs(self):
         open(self.logfile, "w").close()
